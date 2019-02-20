@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mToggle;
     private DrawerLayout mDrawer;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         initToolbar(toolbar);
 
     }
@@ -39,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         mDrawer.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+//        mToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(mDrawer.isDrawerOpen(GravityCompat.START)){
+//                    mDrawer.closeDrawer(GravityCompat.START);
+//                }else {
+//                    mDrawer.openDrawer(GravityCompat.START);
+//                }
+//
+//            }
+//        });
+        initFragment();
     }
 
     private void initFragment() {
@@ -51,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             mDrawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            getCurrentFragment().onResume();
         }
     }
 
@@ -83,4 +102,42 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setBurger(Boolean show) {
+        final ActionBar actionBar = getSupportActionBar();
+        if (show) {
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(false);
+                mToggle.setDrawerIndicatorEnabled(true);
+                mToggle.syncState();
+            }
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mDrawer.isDrawerOpen(GravityCompat.START)){
+                        mDrawer.closeDrawer(GravityCompat.START);
+                    }else {
+                        mDrawer.openDrawer(GravityCompat.START);
+                    }
+                }
+            });
+        } else {
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeButtonEnabled(true);
+
+            }
+
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        onBackPressed();
+                }
+            });
+        }
+    }
+
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
+    }
 }
+

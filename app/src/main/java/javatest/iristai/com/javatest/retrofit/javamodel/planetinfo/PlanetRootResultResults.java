@@ -1,9 +1,59 @@
-package javatest.iristai.com.javatest.retrofit.javamodel.planet;
+package javatest.iristai.com.javatest.retrofit.javamodel.planetinfo;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PlanetRootResultResults implements java.io.Serializable {
-    private static final long serialVersionUID = 1255549313064501226L;
+public class PlanetRootResultResults implements Parcelable {
+    public static final Creator<PlanetRootResultResults> CREATOR = new Creator<PlanetRootResultResults>() {
+        @Override
+        public PlanetRootResultResults createFromParcel(Parcel source) {
+            PlanetRootResultResults var = new PlanetRootResultResults();
+            var.F_Name_Ch = source.readString();
+            var.F_pdf02_ALT = source.readString();
+            var.F_Name_En = source.readString();
+            var.F_Voice01_URL = source.readString();
+            var.F_Name_Latin = source.readString();
+            var.F_Pic04_URL = source.readString();
+            var.F_Summary = source.readString();
+            var.F_Brief = source.readString();
+            var.F_Location = source.readString();
+            var.F_pdf02_URL = source.readString();
+            var.F_Voice01_ALT = source.readString();
+            var.F_Pic03_ALT = source.readString();
+            var.F_Voice02_URL = source.readString();
+            var.F_Voice02_ALT = source.readString();
+            var.F_Pic01_URL = source.readString();
+            var.F_Pic02_ALT = source.readString();
+            var.F_FunctionApplication = source.readString();
+            var.F_Keywords = source.readString();
+            var.F_Family = source.readString();
+            var.F_CID = source.readString();
+            var.F_Pic01_ALT = source.readString();
+            var.F_Pic02_URL = source.readString();
+            var.F_Update = source.readString();
+            var.F_Voice03_URL = source.readString();
+            var.F_Code = source.readString();
+            var.F_Voice03_ALT = source.readString();
+            var.F_Pic03_URL = source.readString();
+            var.F_Vedio_URL = source.readString();
+            var.F_pdf01_ALT = source.readString();
+            var.F_AlsoKnown = source.readString();
+            var.F_pdf01_URL = source.readString();
+            var._id = source.readInt();
+            var.F_Feature = source.readString();
+            var.F_Pic04_ALT = source.readString();
+            var.F_Genus = source.readString();
+            var.F_Geo = source.readString();
+            return var;
+        }
+
+        @Override
+        public PlanetRootResultResults[] newArray(int size) {
+            return new PlanetRootResultResults[size];
+        }
+    };
     private String F_Name_Ch;
     private String F_pdf02_ALT;
     private String F_Name_En;
@@ -20,7 +70,7 @@ public class PlanetRootResultResults implements java.io.Serializable {
     private String F_Voice02_ALT;
     private String F_Pic01_URL;
     private String F_Pic02_ALT;
-    @SerializedName("result")
+    @SerializedName("F_Function&Application")
     private String F_FunctionApplication;
     private String F_Keywords;
     private String F_Family;
@@ -328,5 +378,50 @@ public class PlanetRootResultResults implements java.io.Serializable {
 
     public void setF_Geo(String F_Geo) {
         this.F_Geo = F_Geo;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.F_Name_Ch);
+        dest.writeString(this.F_pdf02_ALT);
+        dest.writeString(this.F_Name_En);
+        dest.writeString(this.F_Voice01_URL);
+        dest.writeString(this.F_Name_Latin);
+        dest.writeString(this.F_Pic04_URL);
+        dest.writeString(this.F_Summary);
+        dest.writeString(this.F_Brief);
+        dest.writeString(this.F_Location);
+        dest.writeString(this.F_pdf02_URL);
+        dest.writeString(this.F_Voice01_ALT);
+        dest.writeString(this.F_Pic03_ALT);
+        dest.writeString(this.F_Voice02_URL);
+        dest.writeString(this.F_Voice02_ALT);
+        dest.writeString(this.F_Pic01_URL);
+        dest.writeString(this.F_Pic02_ALT);
+        dest.writeString(this.F_FunctionApplication);
+        dest.writeString(this.F_Keywords);
+        dest.writeString(this.F_Family);
+        dest.writeString(this.F_CID);
+        dest.writeString(this.F_Pic01_ALT);
+        dest.writeString(this.F_Pic02_URL);
+        dest.writeString(this.F_Update);
+        dest.writeString(this.F_Voice03_URL);
+        dest.writeString(this.F_Code);
+        dest.writeString(this.F_Voice03_ALT);
+        dest.writeString(this.F_Pic03_URL);
+        dest.writeString(this.F_Vedio_URL);
+        dest.writeString(this.F_pdf01_ALT);
+        dest.writeString(this.F_AlsoKnown);
+        dest.writeString(this.F_pdf01_URL);
+        dest.writeInt(this._id);
+        dest.writeString(this.F_Feature);
+        dest.writeString(this.F_Pic04_ALT);
+        dest.writeString(this.F_Genus);
+        dest.writeString(this.F_Geo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

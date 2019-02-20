@@ -2,7 +2,7 @@ package javatest.iristai.com.javatest.retrofit.api;
 
 import io.reactivex.Observable;
 import javatest.iristai.com.javatest.retrofit.javamodel.category.CategoryListRoot;
-import javatest.iristai.com.javatest.retrofit.javamodel.planet.PlanetRoot;
+import javatest.iristai.com.javatest.retrofit.javamodel.planetinfo.PlanetRoot;
 
 public class ApiClient {
 

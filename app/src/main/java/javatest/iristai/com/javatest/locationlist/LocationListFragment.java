@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javatest.iristai.com.javatest.MainActivity;
 import javatest.iristai.com.javatest.R;
 import javatest.iristai.com.javatest.base.RetrofitFragment;
+import javatest.iristai.com.javatest.locationinfo.LocationInfoFragment;
 import javatest.iristai.com.javatest.retrofit.api.ApiClient;
 import javatest.iristai.com.javatest.retrofit.api.Subscriber;
 import javatest.iristai.com.javatest.retrofit.javamodel.category.CategoryListRoot;
@@ -39,6 +40,7 @@ public class LocationListFragment extends RetrofitFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = (MainActivity) getActivity();
     }
 
     @Nullable
@@ -78,6 +80,7 @@ public class LocationListFragment extends RetrofitFragment {
         rvListView.setHasFixedSize(true);
         rvListView.setAdapter(mAdapter);
 
+        callLocationListAPI();
     }
 
     private void callLocationListAPI() {
@@ -88,9 +91,9 @@ public class LocationListFragment extends RetrofitFragment {
             public void onNext(CategoryListRoot responseData) {
                 progressBar.setVisibility(View.GONE);
                 mNoData.setVisibility(View.GONE);
-                if (responseData.getResult().getResults() != null && responseData.getResult().getResults().) {
+                if (responseData.getResult().getResults() != null && responseData.getResult().getResults().size() > 0) {
                     mResults = responseData.getResult().getResults();
-                    mAdapter.refreshData(mResults)
+                    mAdapter.refreshData(mResults);
                 } else {
                     mNoData.setVisibility(View.VISIBLE);
                 }
@@ -105,5 +108,12 @@ public class LocationListFragment extends RetrofitFragment {
                 mNoData.setVisibility(View.VISIBLE);
             }
         }));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mActivity.setTitle(getString(R.string.main_title));
+        mActivity.setBurger(true);
     }
 }
